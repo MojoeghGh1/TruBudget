@@ -9,7 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Unreleased
 
-<!-- ### Added -->
+### Added
+
+- Placeholders are being shown in case of an empty state [#31](https://github.com/openkfw/TruBudget/issues/31)
 
 <!-- ### Changed -->
 

@@ -31,12 +31,16 @@ class SubProjectContainer extends Component {
   constructor(props) {
     super(props);
     this.projectId = this.props.location.pathname.split("/")[2];
+    this.state = {
+      data: false
+    };
   }
 
   componentDidMount() {
     this.props.setSelectedView(this.projectId, "project");
     this.props.fetchAllProjectDetails(this.projectId, true);
     this.props.fetchUser();
+    this.setState({ data: true });
   }
 
   closeProject = () => {
@@ -60,14 +64,26 @@ class SubProjectContainer extends Component {
       <div>
         <LiveUpdates update={this.update} />
         <div style={globalStyles.innerContainer}>
-          <ProjectDetails
-            {...this.props}
-            projectId={projectId}
-            canAssignProject={canAssign}
-            closeProject={this.closeProject}
-            canClose={canClose}
-          />
-          <SubProjects {...this.props} projectId={projectId} canCreateSubProject={canCreateSubproject} />
+          {!this.state.data ? (
+            <div />
+          ) : (
+            <div>
+              <ProjectDetails
+                {...this.props}
+                projectId={projectId}
+                canAssignProject={canAssign}
+                closeProject={this.closeProject}
+                canClose={canClose}
+                isDataLoading={this.props.isDataLoading}
+              />
+              <SubProjects
+                {...this.props}
+                projectId={projectId}
+                canCreateSubProject={canCreateSubproject}
+                isDataLoading={this.props.isDataLoading}
+              />
+            </div>
+          )}
           <ProjectHistoryDrawer projectId={projectId} />
           {this.props.permissionDialogShown ? (
             <SubprojectPermissionsContainer projectId={projectId} subProjects={this.props.subProjects} />
@@ -130,7 +146,8 @@ const mapStateToProps = state => {
     isSubProjectAdditionalDataShown: state.getIn(["detailview", "isSubProjectAdditionalDataShown"]),
     idForInfo: state.getIn(["detailview", "idForInfo"]),
     isRoot: state.getIn(["navbar", "isRoot"]),
-    permissionDialogShown: state.getIn(["detailview", "showSubProjectPermissions"])
+    permissionDialogShown: state.getIn(["detailview", "showSubProjectPermissions"]),
+    isDataLoading: state.getIn(["loading", "loadingVisible"])
   };
 };
 

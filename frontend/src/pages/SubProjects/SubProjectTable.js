@@ -15,16 +15,16 @@ import MoreIcon from "@material-ui/icons/MoreHoriz";
 import LaunchIcon from "@material-ui/icons/ZoomIn";
 import _isEmpty from "lodash/isEmpty";
 import React from "react";
-
 import { statusMapping, toAmountString } from "../../helper";
 import strings from "../../localizeStrings";
 import {
   canUpdateSubProject,
   canViewSubProjectDetails,
-  canViewSubProjectSummary,
-  canViewSubProjectPermissions
+  canViewSubProjectPermissions,
+  canViewSubProjectSummary
 } from "../../permissions";
 import ActionButton from "../Common/ActionButton";
+import { Subproject as EmptySubproject } from "../Common/EmptyStates";
 
 const styles = {
   subprojectTable: {
@@ -201,20 +201,25 @@ const SubProjectTable = ({
     showSubProjectAdditionalData,
     isSubProjectAdditionalDataShown
   );
+
   return (
     <Card>
       <CardHeader title={strings.common.subprojects} />
-      <Table data-test="ssp-table" className={classes.subprojectTable}>
-        <TableHead>
-          <TableRow>
-            <TableCell className={classes.displayName}>{strings.common.subproject}</TableCell>
-            <TableCell className={classes.projectdBudget}>{strings.common.projected_budget}</TableCell>
-            <TableCell className={classes.status}>{strings.common.status}</TableCell>
-            <TableCell className={classes.actions}> </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>{tableEntries}</TableBody>
-      </Table>
+      {subProjects.length > 0 ? (
+        <Table data-test="ssp-table" className={classes.subprojectTable}>
+          <TableHead>
+            <TableRow>
+              <TableCell className={classes.displayName}>{strings.common.subproject}</TableCell>
+              <TableCell className={classes.projectdBudget}>{strings.common.projected_budget}</TableCell>
+              <TableCell className={classes.status}>{strings.common.status}</TableCell>
+              <TableCell className={classes.actions}> </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>{tableEntries}</TableBody>
+        </Table>
+      ) : (
+        <EmptySubproject />
+      )}
     </Card>
   );
 };

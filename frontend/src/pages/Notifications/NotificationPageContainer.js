@@ -1,24 +1,31 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import { toJS } from "../../helper";
+import globalStyles from "../../styles";
 import {
-  markNotificationAsRead,
-  fetchNotifications,
-  setNotifcationsPerPage,
-  markMultipleNotificationsAsRead,
+  disableLiveUpdates,
   enableLiveUpdates,
   fetchNotificationCounts,
-  disableLiveUpdates
+  fetchNotifications,
+  markMultipleNotificationsAsRead,
+  markNotificationAsRead,
+  setNotifcationsPerPage
 } from "./actions";
 import NotificationPage from "./NotificationPage";
 
-import globalStyles from "../../styles";
-import { toJS } from "../../helper";
-
 class NotificationPageContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: false
+    };
+  }
+
   componentDidMount() {
     this.props.disableLiveUpdates();
     this.props.fetchNotifications(this.props.currentPage);
+    this.setState({ data: true });
   }
 
   componentWillUnmount() {
@@ -31,9 +38,7 @@ class NotificationPageContainer extends Component {
 
   render() {
     return (
-      <div style={globalStyles.innerContainer}>
-        <NotificationPage {...this.props} />
-      </div>
+      <div style={globalStyles.innerContainer}>{!this.state.data ? <div /> : <NotificationPage {...this.props} />}</div>
     );
   }
 }
@@ -58,7 +63,8 @@ const mapStateToProps = state => {
     notificationsPerPage: state.getIn(["notifications", "notificationPageSize"]),
     unreadNotificationCount: state.getIn(["notifications", "unreadNotificationCount"]),
     notificationCount: state.getIn(["notifications", "totalNotificationCount"]),
-    currentPage: state.getIn(["notifications", "currentNotificationPage"])
+    currentPage: state.getIn(["notifications", "currentNotificationPage"]),
+    isDataLoading: state.getIn(["loading", "loadingVisible"])
   };
 };
 

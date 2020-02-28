@@ -10,6 +10,8 @@ import WorkflowDetails from "./WorkflowDetails";
 import WorkflowList from "./WorkflowList";
 import strings from "../../localizeStrings";
 
+import { WorkflowItem as EmptyWorkflowItem } from "../Common/EmptyStates";
+
 const style = {
   paddingLeft: "0px"
 };
@@ -45,7 +47,13 @@ const createWorkflowItems = ({ workflowItems, ...props }) => {
     props.updateWorkflowOrderOnState(workflowItems);
   };
 
-  return <WorkflowList lockAxis={"y"} workflowItems={workflowItems} onSortEnd={onSortEnd} {...props} />;
+  return workflowItems.length > 0 ? (
+    <WorkflowList lockAxis={"y"} workflowItems={workflowItems} onSortEnd={onSortEnd} {...props} />
+  ) : (
+    <div style={{ backgroundColor: "#f3f3f3" }}>
+      <EmptyWorkflowItem />
+    </div>
+  );
 };
 
 // Not sure about the Name
