@@ -1,10 +1,10 @@
-import React from "react";
-
+import { CardContent } from "@material-ui/core";
+import List from "@material-ui/core/List";
+import Paper from "@material-ui/core/Paper";
 import { withStyles, withTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import List from "@material-ui/core/List";
-import { CardContent } from "@material-ui/core";
-import Paper from "@material-ui/core/Paper";
+import React from "react";
+
 import strings from "../../localizeStrings";
 
 const styles = theme => {
