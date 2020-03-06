@@ -15,6 +15,7 @@ import MoreIcon from "@material-ui/icons/MoreHoriz";
 import LaunchIcon from "@material-ui/icons/ZoomIn";
 import _isEmpty from "lodash/isEmpty";
 import React from "react";
+import Badge from "@material-ui/core/Badge";
 
 import { statusMapping, toAmountString } from "../../helper";
 import strings from "../../localizeStrings";
@@ -62,6 +63,16 @@ const styles = {
   }
 };
 
+const StyledBadge = withStyles(theme => ({
+  badge: {
+    right: 14,
+    top: 33,
+    padding: "3px",
+    background: theme.palette.warning,
+    border: `2px solid ${theme.palette.background.paper}`
+  }
+}))(Badge);
+
 const displaySubprojectBudget = budgets => {
   const consolidatedBudgets = budgets.reduce((acc, next) => {
     acc[next.currencyCode] = acc[next.currencyCode] ? [...acc[next.currencyCode], next] : [next];
@@ -102,6 +113,7 @@ const displaySubprojectBudget = budgets => {
 };
 
 const getTableEntries = (
+  idsPermissionsUnassigned,
   classes,
   subProjects,
   location,
@@ -117,6 +129,7 @@ const getTableEntries = (
     const canViewPermissions = canViewSubProjectPermissions(allowedIntents);
     const redacted = displayName === null && _isEmpty(projectedBudgets);
     const additionalDataEmpty = _isEmpty(additionalData);
+    const hideBadge = idsPermissionsUnassigned.find(el => el === id) === undefined ? true : false;
 
     if (!redacted) {
       const amountString = displaySubprojectBudget(projectedBudgets);
@@ -150,13 +163,15 @@ const getTableEntries = (
                 />
               </div>
               <div className={classes.button}>
-                <ActionButton
-                  notVisible={!canViewPermissions}
-                  onClick={() => showSubProjectPermissions(id, displayName)}
-                  title={strings.common.show_permissions}
-                  icon={<PermissionIcon />}
-                  data-test={"spp-button-" + index}
-                />
+                <StyledBadge color="secondary" variant="dot" invisible={hideBadge}>
+                  <ActionButton
+                    notVisible={!canViewPermissions}
+                    onClick={() => showSubProjectPermissions(id, displayName)}
+                    title={hideBadge ? strings.common.show_permissions : strings.confirmation.assign_permissions}
+                    icon={<PermissionIcon />}
+                    data-test={"spp-button-" + index}
+                  />
+                </StyledBadge>
               </div>
               <div className={classes.button}>
                 <ActionButton
@@ -177,6 +192,7 @@ const getTableEntries = (
 };
 
 const SubProjectTable = ({
+  idsPermissionsUnassigned,
   classes,
   subProjects,
   history,
@@ -187,6 +203,7 @@ const SubProjectTable = ({
   isSubProjectAdditionalDataShown
 }) => {
   const tableEntries = getTableEntries(
+    idsPermissionsUnassigned,
     classes,
     subProjects,
     location,

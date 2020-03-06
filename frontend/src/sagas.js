@@ -235,7 +235,17 @@ function* showSnackbarSuccess() {
   yield put({
     type: SHOW_SNACKBAR,
     show: true,
-    isError: false
+    isError: false,
+    isWarning: false
+  });
+}
+
+function* showSnackbarWarning() {
+  yield put({
+    type: SHOW_SNACKBAR,
+    show: true,
+    isError: false,
+    isWarning: true
   });
 }
 
@@ -254,7 +264,8 @@ function* handleError(error) {
     yield put({
       type: SHOW_SNACKBAR,
       show: true,
-      isError: true
+      isError: true,
+      isWarning: false
     });
   } else if (error.response && error.response.data && error.response.data.message) {
     yield put({
@@ -264,7 +275,8 @@ function* handleError(error) {
     yield put({
       type: SHOW_SNACKBAR,
       show: true,
-      isError: true
+      isError: true,
+      isWarning: false
     });
   } else {
     yield put({
@@ -274,7 +286,8 @@ function* handleError(error) {
     yield put({
       type: SHOW_SNACKBAR,
       show: true,
-      isError: true
+      isError: true,
+      isWarning: false
     });
   }
 }
@@ -455,10 +468,11 @@ export function* editProjectSaga({ projectId, changes, deletedProjectedBudgets =
 
 export function* createSubProjectSaga({ projectId, name, description, currency, projectedBudgets, showLoading }) {
   yield execute(function*() {
-    yield callApi(api.createSubProject, projectId, name, description, currency, projectedBudgets);
-    yield showSnackbarSuccess();
+    const { data } = yield callApi(api.createSubProject, projectId, name, description, currency, projectedBudgets);
+    yield showSnackbarWarning();
     yield put({
-      type: CREATE_SUBPROJECT_SUCCESS
+      type: CREATE_SUBPROJECT_SUCCESS,
+      subprojectId: data.subproject.id
     });
     yield put({
       type: FETCH_ALL_PROJECT_DETAILS,
@@ -511,10 +525,11 @@ export function* editSubProjectSaga({ projectId, subprojectId, changes, deletedP
 
 export function* createWorkflowItemSaga({ type, ...rest }) {
   yield execute(function*() {
-    yield callApi(api.createWorkflowItem, rest);
-    yield showSnackbarSuccess();
+    const { data } = yield callApi(api.createWorkflowItem, rest);
+    yield showSnackbarWarning();
     yield put({
-      type: CREATE_WORKFLOW_SUCCESS
+      type: CREATE_WORKFLOW_SUCCESS,
+      workflowitemId: data.workflowitem.id
     });
 
     yield put({
@@ -759,7 +774,8 @@ export function* loginSaga({ user }) {
     yield put({
       type: SHOW_SNACKBAR,
       show: false,
-      isError: false
+      isError: false,
+      isWarning: false
     });
   }
   function* onLoginError(error) {
@@ -1978,7 +1994,8 @@ function* exportDataSaga() {
       yield put({
         type: SHOW_SNACKBAR,
         show: true,
-        isError: true
+        isError: true,
+        isWarning: false
       });
     }
   );

@@ -49,6 +49,7 @@ const defaultState = fromJS({
     currency: "",
     projectedBudgets: []
   },
+  idsPermissionsUnassigned: [],
   creationDialogShown: false,
   editDialogShown: false,
   showHistory: false,
@@ -98,7 +99,8 @@ export default function detailviewReducer(state = defaultState, action) {
         temporaryPermissions: defaultState.get("temporaryPermissions"),
         idForPermissions: action.id,
         displayNameForPermissions: action.displayName,
-        showSubProjectPermissions: true
+        showSubProjectPermissions: true,
+        idsPermissionsUnassigned: state.get("idsPermissionsUnassigned").filter(id => id !== action.id)
       });
     case SHOW_SUBPROJECT_ADDITIONAL_DATA:
       return state.merge({
@@ -145,7 +147,10 @@ export default function detailviewReducer(state = defaultState, action) {
       });
       return newState;
     case CREATE_SUBPROJECT_SUCCESS:
-      return state.set("subprojectToAdd", defaultState.getIn(["subprojectToAdd"]));
+      return state.merge({
+        subprojectToAdd: defaultState.getIn(["subprojectToAdd"]),
+        idsPermissionsUnassigned: state.get("idsPermissionsUnassigned").concat(fromJS(action.subprojectId))
+      });
     case SHOW_PROJECT_ASSIGNEES:
       return state.set("showProjectAssignees", true);
     case HIDE_PROJECT_ASSIGNEES:

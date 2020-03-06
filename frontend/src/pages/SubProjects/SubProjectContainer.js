@@ -130,7 +130,8 @@ const mapStateToProps = state => {
     isSubProjectAdditionalDataShown: state.getIn(["detailview", "isSubProjectAdditionalDataShown"]),
     idForInfo: state.getIn(["detailview", "idForInfo"]),
     isRoot: state.getIn(["navbar", "isRoot"]),
-    permissionDialogShown: state.getIn(["detailview", "showSubProjectPermissions"])
+    permissionDialogShown: state.getIn(["detailview", "showSubProjectPermissions"]),
+    idsPermissionsUnassigned: state.getIn(["detailview", "idsPermissionsUnassigned"])
   };
 };
 

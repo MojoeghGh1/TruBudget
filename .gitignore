@@ -9,3 +9,5 @@ Untitled*
 node_modules
 yarn-error.log
 .markdownlint.*
+.vs/
+e2e-test/debug.log

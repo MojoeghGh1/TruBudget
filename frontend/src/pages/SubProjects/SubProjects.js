@@ -16,7 +16,7 @@ const SubProjects = props => {
       }}
     >
       <Card>
-        <SubProjectTable {...props} />
+        <SubProjectTable idsPermissionsUnassigned={props.idsPermissionsUnassigned} {...props} />
       </Card>
       <div
         style={{
