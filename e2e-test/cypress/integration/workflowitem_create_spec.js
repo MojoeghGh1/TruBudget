@@ -81,4 +81,24 @@ describe("Workflowitem create", function() {
     cy.get("[data-test=createWorkflowitem]").should("be.visible");
     cy.get("[data-test=createWorkflowitem]").should("be.disabled");
   });
+
+  it("Check warnings that permissions are not assigned", function() {
+    // Create a workflow item
+    cy.get("[data-test=createWorkflowitem]").click();
+    cy.get("[data-test=nameinput] input").type("Test");
+    cy.get("[data-test=next]").click();
+    cy.get("[data-test=submit]").click();
+
+    //Check snackbar warning visible
+    cy.get("[data-test=client-snackbar]")
+      .should("be.visible")
+      .should("contain", "permissions");
+
+    //Check warning badge
+    cy.get("[data-test=warning-badge]").should("be.visible");
+    cy.get("[data-test=show-workflowitem-permissions]").click();
+    cy.get("[data-test=warning-badge]").should("not.be.checked");
+    cy.get("[data-test=permission-submit]").click();
+    cy.get("[data-test=warning-badge]").should("not.be.checked");
+  });
 });

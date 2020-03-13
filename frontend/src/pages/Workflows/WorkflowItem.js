@@ -370,7 +370,7 @@ const renderActionButtons = (
           data-test="edit-workflowitem"
           iconButtonStyle={getButtonStyle(workflowSortEnabled, status)}
         />
-        <StyledBadge color="secondary" variant="dot" invisible={hideBadge}>
+        <StyledBadge color="secondary" variant="dot" invisible={hideBadge} data-test={"warning-badge"}>
           <ActionButton
             notVisible={workflowSortEnabled || permissionsDisabled}
             onClick={permissionsDisabled ? undefined : showPerm}

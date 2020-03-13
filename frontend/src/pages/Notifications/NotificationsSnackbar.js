@@ -48,7 +48,7 @@ const ContentWrapper = props => {
       className={classNames(classes[variant], className)}
       aria-describedby="client-snackbar"
       message={
-        <span id="client-snackbar" className={classes.message}>
+        <span id="client-snackbar" data-test="client-snackbar" className={classes.message}>
           <Icon className={classNames(classes.icon, classes.iconVariant)} />
           {message}
         </span>
@@ -71,7 +71,7 @@ const SnackbarContentWrapper = withStyles(styles)(ContentWrapper);
 
 const NotificationsSnackbar = props => {
   return (
-    <Snackbar open={props.showSnackbar} autoHideDuration={4000} onClose={props.closeSnackbar}>
+    <Snackbar open={props.showSnackbar} autoHideDuration={4000000} onClose={props.closeSnackbar}>
       <SnackbarContentWrapper
         variant={props.snackbarError ? "error" : props.snackbarWarning ? "warning" : "success"}
         message={props.snackbarMessage}
