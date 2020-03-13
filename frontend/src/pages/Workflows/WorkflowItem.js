@@ -18,7 +18,7 @@ import _isEmpty from "lodash/isEmpty";
 import React from "react";
 import { SortableElement } from "react-sortable-hoc";
 import ActionButton from "../Common/ActionButton";
-import Badge from "@material-ui/core/Badge";
+import StyledBadge from "../Common/StyledBadge";
 
 import { amountTypes, fromAmountString, toAmountString } from "../../helper.js";
 import strings from "../../localizeStrings";
@@ -29,7 +29,6 @@ import {
   canViewWorkflowItemPermissions
 } from "../../permissions.js";
 import WorkflowAssigneeContainer from "./WorkflowAssigneeContainer.js";
-import { withStyles } from "@material-ui/core";
 
 const styles = {
   text: {
@@ -150,16 +149,6 @@ const styles = {
     cursor: "-webkit-grab"
   }
 };
-
-const StyledBadge = withStyles(theme => ({
-  badge: {
-    right: 14,
-    top: 33,
-    padding: "3px",
-    background: theme.palette.warning,
-    border: `2px solid ${theme.palette.background.paper}`
-  }
-}))(Badge);
 
 const createLine = (isFirst, selectable) => {
   const lineStyle =
@@ -340,12 +329,8 @@ const renderActionButtons = (
   const additionalDataDisabled = _isEmpty(additionalData) || workflowSortEnabled;
   const editDisabled = !canEditWorkflow || workflowSortEnabled;
   const permissionsDisabled = !canListWorkflowPermissions || workflowSortEnabled;
-  const hideBadge =
-    idsPermissionsUnassigned.find(el => el === id) === undefined
-      ? true
-      : workflowSortEnabled || permissionsDisabled
-      ? true
-      : false;
+  const workflowitemAssigneeChanged = idsPermissionsUnassigned.find(el => el === id) === undefined;
+  const isBadgeHidden = workflowitemAssigneeChanged ? true : workflowSortEnabled || permissionsDisabled ? true : false;
   const closeDisabled = !canCloseWorkflow || workflowSortEnabled;
   return (
     <div style={styles.actionCell}>
@@ -370,7 +355,7 @@ const renderActionButtons = (
           data-test="edit-workflowitem"
           iconButtonStyle={getButtonStyle(workflowSortEnabled, status)}
         />
-        <StyledBadge color="secondary" variant="dot" invisible={hideBadge} data-test={"warning-badge"}>
+        <StyledBadge color="secondary" variant="dot" invisible={isBadgeHidden} data-test={"warning-badge"}>
           <ActionButton
             notVisible={workflowSortEnabled || permissionsDisabled}
             onClick={permissionsDisabled ? undefined : showPerm}
@@ -378,7 +363,7 @@ const renderActionButtons = (
             title={
               permissionsDisabled
                 ? ""
-                : hideBadge
+                : isBadgeHidden
                 ? strings.common.show_permissions
                 : strings.confirmation.assign_permissions
             }
@@ -403,7 +388,17 @@ const renderActionButtons = (
 };
 
 export const WorkflowItem = SortableElement(
-  ({ workflow, mapIndex, index, currentWorkflowSelectable, workflowSortEnabled, parentProject, users, ...props }) => {
+  ({
+    workflow,
+    mapIndex,
+    index,
+    currentWorkflowSelectable,
+    workflowSortEnabled,
+    parentProject,
+    users,
+    idsPermissionsUnassigned,
+    ...props
+  }) => {
     const { storeWorkflowItemsSelected, selectedWorkflowItems, currency: targetCurrency } = props;
     const {
       id,
@@ -487,7 +482,7 @@ export const WorkflowItem = SortableElement(
               status,
               () => props.showWorkflowitemAdditionalData(id),
               additionalData,
-              props.idsPermissionsUnassigned,
+              idsPermissionsUnassigned,
               id
             )}
           </div>
