@@ -42,6 +42,7 @@ const de = {
     done: "Done",
     edit: "German: Edit",
     edited: "German: Edited",
+    email: "Email",
     finish: "Finish",
     grant: "German: grant",
     history: "History",
@@ -223,6 +224,9 @@ const de = {
     password_conditions_letter: "Mindestens einen Buchstaben enthalten",
     password_conditions_number: "Mindestens eine Zahl enthalten"
   },
+  userProfile: {
+    invalid_email_address: "Ungültige Emailadresse"
+  },
 
   nodesDashboard: {
     access: "German: Access",
@@ -336,6 +340,7 @@ const de = {
     done_workflow: "German: Status of workflow {0} set to Done",
     edit_transaction: "German: Transaction {0} got adapted",
     edit_workflow: "German: Workflow item {0} got adapted",
+    email_saved: "Email {0} gespeichert",
     no_permissions: "German: (No permissions to see further details)",
     notification_card_text:
       "German: Please find your current notifications below_ These display action items or information items to be dealt with_",
@@ -363,6 +368,7 @@ const de = {
     read_all: "German: Read All",
     review_transaction: "German: You are assigned to review the transaction {0}",
     review_workflow: "German: You are assigned to review the workflow item {0}",
+    save_email_error: "Email konnte nicht gespeichert werden",
     subproject_archive: "German: Subproject {0} was archived",
     subproject_assign: "German: Subproject {0} was assigned to you",
     subproject_assigned: "German: Subproject {0} was assigned to you",

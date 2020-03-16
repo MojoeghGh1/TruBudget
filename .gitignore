@@ -11,3 +11,4 @@ yarn-error.log
 .markdownlint.*
 .vs/
 e2e-test/debug.log
+*.code-workspace

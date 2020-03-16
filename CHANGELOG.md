@@ -13,13 +13,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Show warnings that there are no permissions assigned [#441]
 
+- Email notification service [#419](https://github.com/openkfw/TruBudget/issues/419)
+
 <!-- ### Changed -->
 
 <!-- ### Deprecated -->
 
 <!-- ### Removed -->
 
-<!-- ### Fixed -->
+### Fixed
+
+- Implement group permissions correctly [#440](https://github.com/openkfw/TruBudget/issues/440)
+- Fix permissions for viewing summary [#440](https://github.com/openkfw/TruBudget/issues/440)
 
 <!-- ### Changed -->
 
