@@ -9,5 +9,9 @@ Untitled*
 node_modules
 yarn-error.log
 .markdownlint.*
+<<<<<<< HEAD
 .vs/
 e2e-test/debug.log
+=======
+*.code-workspace
+>>>>>>> master

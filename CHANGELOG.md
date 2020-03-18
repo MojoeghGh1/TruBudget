@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Show warnings that there are no permissions assigned [#441]
+- Show warnings that there are no permissions assigned [#441](https://github.com/openkfw/TruBudget/issues/441)
 
 <!-- ### Changed -->
 
@@ -20,6 +20,27 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 <!-- ### Removed -->
 
 <!-- ### Fixed -->
+
+<!-- ### Changed -->
+
+<!-- ### Security -->
+
+# [1.8.0] - 2019-03-16
+
+### Added
+
+- Email notification service [#419](https://github.com/openkfw/TruBudget/issues/419)
+
+<!-- ### Changed -->
+
+<!-- ### Deprecated -->
+
+<!-- ### Removed -->
+
+### Fixed
+
+- Implement group permissions correctly [#440](https://github.com/openkfw/TruBudget/issues/440)
+- Fix permissions for viewing summary [#440](https://github.com/openkfw/TruBudget/issues/440)
 
 <!-- ### Changed -->
 
@@ -419,7 +440,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Updated translation keys and language-specific formatting.
 - Fixed bug where the subproject permissions dialog would break the details view of another project.
 
-[unreleased]: https://github.com/openkfw/TruBudget/compare/v1.7.0...master
+[unreleased]: https://github.com/openkfw/TruBudget/compare/v1.8.0...master
+[1.8.0]: https://github.com/openkfw/TruBudget/compare/v1.7.0...v1.8.0
 [1.7.0]: https://github.com/openkfw/TruBudget/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/openkfw/TruBudget/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/openkfw/TruBudget/compare/v1.4.1...v1.5.0

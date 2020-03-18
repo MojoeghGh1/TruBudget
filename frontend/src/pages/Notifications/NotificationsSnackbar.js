@@ -71,7 +71,7 @@ const SnackbarContentWrapper = withStyles(styles)(ContentWrapper);
 
 const NotificationsSnackbar = props => {
   return (
-    <Snackbar open={props.showSnackbar} autoHideDuration={4000000} onClose={props.closeSnackbar}>
+    <Snackbar open={props.showSnackbar} autoHideDuration={4000} onClose={props.closeSnackbar}>
       <SnackbarContentWrapper
         variant={props.snackbarError ? "error" : props.snackbarWarning ? "warning" : "success"}
         message={props.snackbarMessage}
