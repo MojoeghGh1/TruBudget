@@ -18,8 +18,7 @@ const styles = {
     flexDirection: "row",
     opacity: "0.8",
     boxShadow: "none"
-  },
-  debounceInput: {}
+  }
 };
 const Searchbar = ({
   searchBarDisplayed,
@@ -38,8 +37,7 @@ const Searchbar = ({
           <form onSubmit={e => e.preventDefault()} style={{ width: "90%" }}>
             <FormControl style={{ width: "97%", paddingLeft: "5px" }} data-test="search-input">
               <Input
-                input={searchTerm}
-                defaultValue={searchTerm}
+                value={searchTerm}
                 placeholder={previewText}
                 autoFocus={!isSearchBarDisplayedByDefault}
                 onChange={autoSearch ? event => storeSearchTerm(event.target.value) : null}
@@ -58,8 +56,9 @@ const Searchbar = ({
             data-test="clear-searchbar"
             onClick={() => {
               storeSearchTerm("");
-              if (!isSearchBarDisplayedByDefault) {
-                storeSearchBarDisplayed(false);
+              storeSearchBarDisplayed(false);
+              if (isSearchBarDisplayedByDefault) {
+                storeSearchBarDisplayed(true);
               }
             }}
           >
