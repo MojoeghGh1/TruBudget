@@ -78,8 +78,6 @@ const en = {
     submit: "Submit",
     subproject: "Subproject",
     subprojects: "Subprojects",
-    subproject_searchtext: "Search subprojects",
-    project_searchtext: "Search projects",
     tag_already_exists: "Tag already exists!",
     tag: "Tag",
     task_status: "Task status",
@@ -168,7 +166,8 @@ const en = {
     project_roles: "Roles",
     project_thumbnail: "Thumbnail",
     project_title_description: "Name of the project",
-    project_title: "Project title"
+    project_title: "Project title",
+    project_searchtext: "Search projects"
   },
 
   subproject: {
@@ -186,7 +185,8 @@ const en = {
     subproject_preview: "Subproject preview",
     subproject_select_button: "Select",
     subproject_title_description: "Name of the subproject",
-    subproject_title: "Subproject title"
+    subproject_title: "Subproject title",
+    subproject_searchtext: "Search subprojects"
   },
 
   workflow: {

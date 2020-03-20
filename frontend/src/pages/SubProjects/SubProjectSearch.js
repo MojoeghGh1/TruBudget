@@ -18,7 +18,7 @@ const SubProjectSearch = ({
       storeSearchBarDisplayed={storeSearchBarDisplayed}
       storeSearchTerm={storeSearchTerm}
       autoSearch={true}
-      previewText={strings.common.subproject_searchtext}
+      previewText={strings.subproject.subproject_searchtext}
       isSearchBarDisplayedByDefault={true}
     />
   );

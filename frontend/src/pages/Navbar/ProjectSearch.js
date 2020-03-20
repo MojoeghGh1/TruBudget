@@ -32,7 +32,7 @@ const ProjectSearch = ({
       storeSearchBarDisplayed={storeSearchBarDisplayed}
       storeSearchTerm={storeSearchTerm}
       autoSearch={true}
-      previewText={strings.common.project_searchtext}
+      previewText={strings.project.project_searchtext}
     />
   );
 };

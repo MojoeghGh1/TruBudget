@@ -78,8 +78,6 @@ const pt = {
     submit: "Enviar",
     subproject: "Subprojeto",
     subprojects: "Subprojetos",
-    subproject_searchtext: "Subprojetos de pesquisa",
-    project_searchtext: "Pesquisar projectos",
     tag_already_exists: "Tag já existe!",
     tag: "Tag",
     task_status: "Status da tarefa",
@@ -169,7 +167,8 @@ const pt = {
     project_roles: "´Papéis",
     project_thumbnail: "Miniatura",
     project_title_description: "Descrição do projeto",
-    project_title: "Nome do projeto"
+    project_title: "Nome do projeto",
+    project_searchtext: "Pesquisar projectos"
   },
 
   subproject: {
@@ -187,7 +186,8 @@ const pt = {
     subproject_preview: "Pré-visualização de subprojeto",
     subproject_select_button: "Selecionar",
     subproject_title_description: "Descrição do subprojeto",
-    subproject_title: "Nome do subprojeto"
+    subproject_title: "Nome do subprojeto",
+    subproject_searchtext: "Subprojetos de pesquisa"
   },
 
   workflow: {
