@@ -10,6 +10,9 @@ import { withStyles } from "@material-ui/core";
 import Input from "@material-ui/core/Input";
 
 const styles = {
+  searchBar: {
+    display: "flex"
+  },
   searchField: {
     padding: "2px",
     margin: "5px",
@@ -18,6 +21,13 @@ const styles = {
     flexDirection: "row",
     opacity: "0.8",
     boxShadow: "none"
+  },
+  formField: {
+    width: "90%"
+  },
+  formControlField: {
+    width: "97%",
+    paddingLeft: "5px"
   }
 };
 const Searchbar = ({
@@ -31,11 +41,11 @@ const Searchbar = ({
   isSearchBarDisplayedByDefault = false
 }) => {
   return (
-    <div style={{ display: "flex" }} data-test="search-bar">
+    <div style={styles.searchBar} data-test="search-bar">
       {searchBarDisplayed && !searchDisabled ? (
         <Paper style={styles.searchField}>
-          <form onSubmit={e => e.preventDefault()} style={{ width: "90%" }}>
-            <FormControl style={{ width: "97%", paddingLeft: "5px" }} data-test="search-input">
+          <form onSubmit={e => e.preventDefault()} style={styles.formField}>
+            <FormControl style={styles.formControlField} data-test="search-input">
               <Input
                 value={searchTerm}
                 placeholder={previewText}
@@ -56,9 +66,8 @@ const Searchbar = ({
             data-test="clear-searchbar"
             onClick={() => {
               storeSearchTerm("");
-              storeSearchBarDisplayed(false);
-              if (isSearchBarDisplayedByDefault) {
-                storeSearchBarDisplayed(true);
+              if (!isSearchBarDisplayedByDefault) {
+                storeSearchBarDisplayed(false);
               }
             }}
           >

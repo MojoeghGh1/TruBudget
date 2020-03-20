@@ -28,11 +28,11 @@ import {
   SUBPROJECT_DELETED_PROJECTED_BUDGET,
   SUBPROJECT_NAME,
   SUBPROJECT_PROJECTED_BUDGETS,
-  SUB_SEARCH_BAR_DISPLAYED,
-  SUB_SEARCH_TERM,
-  SUB_STORE_FILTERED_PROJECTS,
-  SUB_STORE_HIGHLIGHTING_REGEX,
-  SUB_STORE_SEARCH_TERMS_AS_ARRAY
+  SUBPROJECT_SEARCH_BAR_DISPLAYED,
+  SUBPROJECT_SEARCH_TERM,
+  SUBPROJECT_STORE_FILTERED_PROJECTS,
+  SUBPROJECT_STORE_HIGHLIGHTING_REGEX,
+  SUBPROJECT_STORE_SEARCH_TERMS_AS_ARRAY
 } from "./actions";
 import { convertToURLQuery } from "../../helper";
 
@@ -231,21 +231,21 @@ export default function detailviewReducer(state = defaultState, action) {
           : defaultState.get("temporaryPermissions")
       );
 
-    case SUB_SEARCH_TERM:
+    case SUBPROJECT_SEARCH_TERM:
       const querySearchTerm = convertToURLQuery(action.searchTerm);
       window.history.replaceState("", "Title", "?" + querySearchTerm);
       return state.set("searchTerm", action.searchTerm);
-    case SUB_SEARCH_BAR_DISPLAYED:
+    case SUBPROJECT_SEARCH_BAR_DISPLAYED:
       return state.merge({
         searchTerms: defaultState.get("searchTerms"),
         highlightingRegex: defaultState.get("highlightingRegex"),
         searchBarDisplayed: action.searchBarDisplayed
       });
-    case SUB_STORE_FILTERED_PROJECTS:
+    case SUBPROJECT_STORE_FILTERED_PROJECTS:
       return state.set("filteredSubProjects", fromJS(action.filteredSubProjects));
-    case SUB_STORE_HIGHLIGHTING_REGEX:
+    case SUBPROJECT_STORE_HIGHLIGHTING_REGEX:
       return state.set("highlightingRegex", fromJS(action.highlightingRegex));
-    case SUB_STORE_SEARCH_TERMS_AS_ARRAY:
+    case SUBPROJECT_STORE_SEARCH_TERMS_AS_ARRAY:
       return state.set("searchTerms", fromJS(action.searchTerms));
     default:
       return state;
